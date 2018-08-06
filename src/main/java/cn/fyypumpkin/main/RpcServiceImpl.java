@@ -1,4 +1,4 @@
-package cn.fyypumpkin.Main;
+package cn.fyypumpkin.main;
 
 import cn.fyypumpkin.processor.ServiceProcessor;
 import cn.fyypumpkin.remote.ServerRemote;

@@ -1,9 +1,7 @@
-package cn.fyypumpkin.Main;
+package cn.fyypumpkin.main;
 
-import cn.fyypumpkin.remote.ClientRemote;
 import cn.fyypumpkin.serviceClient.ServiceProxyClient;
 
-import java.util.Arrays;
 
 /**
  * @author fyypumpkin on 2018/8/6

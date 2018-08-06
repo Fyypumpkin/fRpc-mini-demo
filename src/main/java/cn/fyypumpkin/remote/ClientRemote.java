@@ -10,9 +10,9 @@ import java.util.Arrays;
 public class ClientRemote {
     public static final ClientRemote client = new ClientRemote();
 
-    public byte[] getDataRemote(byte[] data){
+    public byte[] getDataRemote(String hostname, int port, byte[] data){
         try(Socket socket = new Socket()){
-            socket.connect(new InetSocketAddress("127.0.0.1", 9999));
+            socket.connect(new InetSocketAddress(hostname, port));
             socket.getOutputStream().write(data);
             socket.getOutputStream().flush();
 

@@ -12,6 +12,7 @@ import java.lang.reflect.Proxy;
  */
 public class ServiceProxyClient {
 
+
     public static <T> T getInstance(Class<T> clazz){
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new ServiceProxy(clazz));
     }
@@ -20,7 +21,7 @@ public class ServiceProxyClient {
 
         private Class clazz;
 
-        public ServiceProxy(Class clazz) {
+        private ServiceProxy(Class clazz) {
             this.clazz = clazz;
         }
 
@@ -37,10 +38,10 @@ public class ServiceProxyClient {
             }
             modal.setArgTypes(argType);
 
-            byte[] req = ServiceProtocol.protocol.encode(modal);
-            byte[] resp = ClientRemote.client.getDataRemote(req);
+            byte[] req = ServiceProtocol.PROTOCOL.encode(modal);
+            byte[] resp = ClientRemote.client.getDataRemote("127.0.0.1", 9999, req);
 
-            return ServiceProtocol.protocol.decode(resp, method.getReturnType());
+            return ServiceProtocol.PROTOCOL.decode(resp, method.getReturnType());
 
         }
     }

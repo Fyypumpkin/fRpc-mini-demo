@@ -9,7 +9,14 @@ import java.io.IOException;
  * @author fyypumpkin on 2018/8/6
  */
 public class JsonUtil {
-   static final ObjectMapper OBJ = new ObjectMapper();
+
+    private static final ObjectMapper OBJ;
+
+    private JsonUtil(){}
+
+    static {
+        OBJ = new ObjectMapper();
+    }
 
     public static <T> T decode (byte[] json, Class<T> clazz) throws IOException {
         return OBJ.readValue(json, clazz);

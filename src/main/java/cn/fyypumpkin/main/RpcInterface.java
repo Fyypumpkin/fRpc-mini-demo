@@ -1,4 +1,4 @@
-package cn.fyypumpkin.Main;
+package cn.fyypumpkin.main;
 
 /**
  * @author fyypumpkin on 2018/8/6

@@ -16,7 +16,8 @@ import java.util.concurrent.Executors;
  * @author fyypumpkin on 2018/8/6
  */
 public class ServerRemote {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private static final ExecutorService executor =
+            Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     public void startServer(int port) throws Exception {
         final ServerSocket server = new ServerSocket();
@@ -26,7 +27,7 @@ public class ServerRemote {
                 final Socket socket = server.accept();
                 executor.execute(new MyRunnable(socket));
             }
-        }finally {
+        } finally {
             server.close();
         }
     }
@@ -44,10 +45,10 @@ public class ServerRemote {
                 int len = is.read(data);
 
                 ServiceProtocol.ProtocolModel modal
-                        = ServiceProtocol.protocol.decode(Arrays.copyOfRange(data, 0, len), ServiceProtocol.ProtocolModel.class);
+                        = ServiceProtocol.PROTOCOL.decode(Arrays.copyOfRange(data, 0, len), ServiceProtocol.ProtocolModel.class);
                 System.out.println(modal.toString());
                 Object o = ServiceProcessor.PROCESSOR.process(modal);
-                os.write(ServiceProtocol.protocol.encode(o));
+                os.write(ServiceProtocol.PROTOCOL.encode(o));
                 os.flush();
             }catch (Exception e){
                 e.printStackTrace();

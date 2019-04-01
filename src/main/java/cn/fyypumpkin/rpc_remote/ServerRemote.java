@@ -1,7 +1,7 @@
-package cn.fyypumpkin.remote;
+package cn.fyypumpkin.rpc_remote;
 
-import cn.fyypumpkin.processor.ServiceProcessor;
 import cn.fyypumpkin.protocol.ServiceProtocol;
+import cn.fyypumpkin.rpc_remote.processor.ServiceProcessor;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author fyypumpkin on 2018/8/6
+ * @author cn.fyypumpkin on 2018/8/6
  */
 public class ServerRemote {
     private static final ExecutorService executor =
@@ -32,7 +32,7 @@ public class ServerRemote {
         }
     }
 
-    class MyRunnable implements Runnable{
+    class MyRunnable implements Runnable {
         private Socket socket;
         public MyRunnable(Socket socket) {
             this.socket = socket;
@@ -45,9 +45,14 @@ public class ServerRemote {
                 int len = is.read(data);
 
                 ServiceProtocol.ProtocolModel modal
-                        = ServiceProtocol.PROTOCOL.decode(Arrays.copyOfRange(data, 0, len), ServiceProtocol.ProtocolModel.class);
+                        = ServiceProtocol.PROTOCOL
+                        .decode(Arrays.copyOfRange(data, 0, len), ServiceProtocol.ProtocolModel.class);
+
                 System.out.println(modal.toString());
+
+                // 远程调用
                 Object o = ServiceProcessor.PROCESSOR.process(modal);
+
                 os.write(ServiceProtocol.PROTOCOL.encode(o));
                 os.flush();
             }catch (Exception e){

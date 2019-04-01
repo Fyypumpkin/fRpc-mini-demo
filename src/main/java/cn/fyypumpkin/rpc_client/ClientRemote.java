@@ -1,11 +1,11 @@
-package cn.fyypumpkin.remote;
+package cn.fyypumpkin.rpc_client;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Arrays;
 
 /**
- * @author fyypumpkin on 2018/8/6
+ * @author cn.fyypumpkin on 2018/8/6
  */
 public class ClientRemote {
     public static final ClientRemote client = new ClientRemote();
